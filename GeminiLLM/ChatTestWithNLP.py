@@ -95,7 +95,6 @@ try:
 
                 response = chat.send_message(user_input)
                 npc_response = response.text
-                f.write(f"[NPC]: {npc_response}\n")
                 conversation_history_for_summary.append({"role": "assistant", "content": npc_response})
                 inizioExtraction = datetime.now()
                 important_keywords_npc = extract_important_keywords_nlp(npc_response)
@@ -136,7 +135,7 @@ try:
                 f.write (f"[Fine Richiesta]: {datetime.now () - inizioRichiesta}\n")
                 print (f"[Fine Richiesta]: {datetime.now () - inizioRichiesta}\n")
                 print (f"[NPC]: {npc_response}")
-
+                f.write (f"[NPC]: {npc_response}\n")
             except Exception as e:
                 error_message = f"Si è verificato un errore: {e}\n"
                 print(error_message)
