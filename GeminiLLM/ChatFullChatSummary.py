@@ -136,11 +136,12 @@ try:
                         top_keywords = [f"{keyword} ({score:.2f})" for keyword, score in sorted_keywords[:10]]
                         summary_prompt += f"\nParole chiave rilevanti (con punteggio di rilevanza): {top_keywords}"
                         summary_prompt += "\nConsidera i temi principali emersi dalle parole chiave più rilevanti."
+                    summary_expectated_length = "**estremamente conciso**"
+                    summary_prompt += (f"\nAssicurati che il riassunto sia {summary_expectated_length}  ma completo e che "
+                                       "non si perdano dettagli cruciali per la comprensione della conversazione, formattato come testo.")
 
-                    summary_prompt += "\nAssicurati che il riassunto sia **estremamente conciso** ma completo e che non si perdano dettagli cruciali per la comprensione della conversazione, formattato come testo."
-
-                    prompt_token_count = get_token_count_gemini (modelSummary, summary_prompt)
-                    print (f"Lunghezza stimata del prompt (token): {prompt_token_count}")
+                    prompt_token_count = get_token_count_gemini (modelSummary, conversation_text_for_summary)
+                    print (f"Lunghezza stimata della chat (token): {prompt_token_count}")
                     f.write (f"[TOKEN_PROMPT_RIASSUNTO]: {prompt_token_count}\n")
 
                     if prompt_token_count > MAX_CHAT_HISTORY_TOKENS:
